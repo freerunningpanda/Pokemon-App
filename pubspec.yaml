@@ -38,6 +38,11 @@ dependencies:
   dio: ^4.0.4
   bloc: ^8.0.2
   flutter_bloc: ^8.0.1
+  flutter_native_splash: ^2.0.1+1
+
+flutter_native_splash:
+  background_image: "assets/splash_screen_bg/splash_screen_bg.png"
+  
 
 dev_dependencies:
   flutter_test:

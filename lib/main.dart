@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/splash_screen.dart';
 import 'pages/home_page.dart';
 import 'pages/pokemon_search_page.dart';
 import 'pages/pokemon_page.dart';
@@ -19,12 +18,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/splash_sreen': (context) => const SplashScreen(),
         '/main_page': (context) => const HomePage(),
         '/main_page/search_page': (context) => const PokemonSearchPage(),
         '/main_page/pokemon_page': (context) => PokemonPage(),
       },
-      initialRoute: '/splash_sreen',
+      initialRoute: '/main_page',
     );
   }
 }
