@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'ability.dart';
+import 'species.dart';
+
 part 'pokemon_info.g.dart';
 
 @JsonSerializable()
@@ -36,38 +39,4 @@ class PokemonInfo {
       _$PokemonInfoFromJson(json);
 
   Map<String, dynamic> toJson() => _$PokemonInfoToJson(this);
-}
-
-@JsonSerializable()
-class Ability {
-  Ability({
-    required this.ability,
-    required this.isHidden,
-    required this.slot,
-  });
-
-  final Species ability;
-  final bool isHidden;
-  final int slot;
-
-  factory Ability.fromJson(Map<String, dynamic> json) =>
-      _$AbilityFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AbilityToJson(this);
-}
-
-@JsonSerializable()
-class Species {
-  Species({
-    required this.name,
-    required this.url,
-  });
-
-  final String name;
-  final String url;
-
-  factory Species.fromJson(Map<String, dynamic> json) =>
-      _$SpeciesFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SpeciesToJson(this);
 }

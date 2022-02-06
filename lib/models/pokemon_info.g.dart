@@ -21,7 +21,7 @@ PokemonInfo _$PokemonInfoFromJson(Map<String, dynamic> json) => PokemonInfo(
       name: json['name'] as String,
       order: json['order'] as int,
       pastTypes: json['past_types'] as List<dynamic>,
-      species: Species.fromJson(json['species'] as Map<String, dynamic>),
+      species: json['species'],
       weight: json['weight'] as int,
     );
 
@@ -39,26 +39,4 @@ Map<String, dynamic> _$PokemonInfoToJson(PokemonInfo instance) =>
       'past_types': instance.pastTypes,
       'species': instance.species,
       'weight': instance.weight,
-    };
-
-Ability _$AbilityFromJson(Map<String, dynamic> json) => Ability(
-      ability: Species.fromJson(json['ability'] as Map<String, dynamic>),
-      isHidden: json['is_hidden'] as bool,
-      slot: json['slot'] as int,
-    );
-
-Map<String, dynamic> _$AbilityToJson(Ability instance) => <String, dynamic>{
-      'ability': instance.ability,
-      'is_hidden': instance.isHidden,
-      'slot': instance.slot,
-    };
-
-Species _$SpeciesFromJson(Map<String, dynamic> json) => Species(
-      name: json['name'] as String,
-      url: json['url'] as String,
-    );
-
-Map<String, dynamic> _$SpeciesToJson(Species instance) => <String, dynamic>{
-      'name': instance.name,
-      'url': instance.url,
     };
