@@ -5,9 +5,14 @@ import 'background_widget.dart';
 import '../cubit/pokemon_cubit.dart';
 import 'custom_progress_indicator.dart';
 
-class PokemonPageWidget extends StatelessWidget {
+class PokemonPageWidget extends StatefulWidget {
   const PokemonPageWidget({Key? key}) : super(key: key);
 
+  @override
+  State<PokemonPageWidget> createState() => _PokemonPageWidgetState();
+}
+
+class _PokemonPageWidgetState extends State<PokemonPageWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PokemonCubit, PokemonState>(
@@ -23,10 +28,6 @@ class PokemonPageWidget extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is PokemonInitial) {
-          context.read<PokemonCubit>().fetchPokemon();
-          return const CustomProgressIndicator();
-        }
         if (state is PokemonLoadedState) {
           return _buildPokemonPage(context, state);
         }
@@ -64,6 +65,39 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
               style: const TextStyle(
                 fontSize: 25.0,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              width: 270.0,
+              height: 50.0,
+              child: ElevatedButton(
+                onPressed: () => Navigator.of(context)
+                    .pushReplacementNamed('/main_page/search_page'),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 5),
+                    Text(
+                      'Back',
+                      style: TextStyle(
+                        fontSize: 25.0,
+                        color: Colors.yellow[700],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                  ),
+                  backgroundColor: MaterialStateProperty.all(
+                    Colors.red[900],
+                  ),
+                ),
               ),
             ),
           ],

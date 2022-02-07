@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import '../models/pokemon_info.dart';
 
 class PokemonApiProvider {
-  Future<PokemonInfo> getPokemonInfo() async {
+  Future<PokemonInfo> getPokemonInfo(String? name) async {
     final dio = Dio();
-    var response = await dio.get('https://pokeapi.co/api/v2/pokemon/bulbasaur');
+    var response = await dio.get('https://pokeapi.co/api/v2/pokemon/$name');
     if (response.statusCode == 200) {
       final PokemonInfo pokemonInfo = PokemonInfo.fromJson(response.data);
       return pokemonInfo;

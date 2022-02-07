@@ -3,5 +3,6 @@ import '../models/pokemon_info.dart';
 
 class PokemonRepository {
   final pokemonApiProvider = PokemonApiProvider();
-  Future<PokemonInfo> getPokemon() => pokemonApiProvider.getPokemonInfo();
+  Future<PokemonInfo> getPokemon(String? name) =>
+      pokemonApiProvider.getPokemonInfo(name);
 }

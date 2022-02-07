@@ -1,32 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon/pages/pokemon_page.dart';
-import 'package:pokemon/pages/pokemon_search_page.dart';
-import 'package:pokemon/services/pokemon_api_provider.dart';
 
+import 'pokemon_search_page.dart';
 import '../widgets/appbar.dart';
 import '../widgets/background_widget.dart';
-import '../models/pokemon_info.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  // late final PokemonInfo pokemonInfo;
-  late Future<PokemonInfo> pokemonObject;
-  String? _pokemonName;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // if (pokemonInfo != null) {
-    //   pokemonObject = Future.value(pokemonInfo);
-    // }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +28,6 @@ class _HomePageState extends State<HomePage> {
                         builder: (context) => const PokemonSearchPage(),
                       ),
                     );
-                    // if (tappedName != null) {
-                    //   _pokemonName = tappedName;
-                    //   pokemonObject = PokemonApiProvider()
-                    //       .getPokemonInfo(name: _pokemonName);
-                    // }
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
