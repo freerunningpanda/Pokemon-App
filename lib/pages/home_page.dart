@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon/pages/pokemon_page.dart';
 import 'package:pokemon/pages/pokemon_search_page.dart';
 import 'package:pokemon/services/pokemon_api_provider.dart';
 
@@ -42,15 +43,17 @@ class _HomePageState extends State<HomePage> {
                 height: 70.0,
                 child: ElevatedButton(
                   onPressed: () async {
-                    var tappedName = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PokemonSearchPage()));
-                    if (tappedName != null) {
-                      _pokemonName = tappedName;
-                      pokemonObject = PokemonApiProvider()
-                          .getPokemonInfo(name: _pokemonName);
-                    }
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PokemonSearchPage(),
+                      ),
+                    );
+                    // if (tappedName != null) {
+                    //   _pokemonName = tappedName;
+                    //   pokemonObject = PokemonApiProvider()
+                    //       .getPokemonInfo(name: _pokemonName);
+                    // }
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -84,43 +87,47 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox(
-                width: 270.0,
-                height: 70.0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/main_page/pokemon_page');
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.loop,
-                        color: Colors.red[900],
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        'Random Pokemon',
-                        style: TextStyle(
-                          fontSize: 25.0,
-                          color: Colors.red[900],
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                    ),
-                    backgroundColor: MaterialStateProperty.all(
-                      Colors.yellow[700],
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: 270.0,
+              //   height: 70.0,
+              //   child: ElevatedButton(
+              //     onPressed: () {
+              //       // Navigator.of(context).pushNamed('/main_page/pokemon_page');
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => const HomePage()));
+              //     },
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         Icon(
+              //           Icons.loop,
+              //           color: Colors.red[900],
+              //         ),
+              //         const SizedBox(width: 5),
+              //         Text(
+              //           'Random Pokemon',
+              //           style: TextStyle(
+              //             fontSize: 25.0,
+              //             color: Colors.red[900],
+              //             fontWeight: FontWeight.bold,
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     style: ButtonStyle(
+              //       shape: MaterialStateProperty.all(
+              //         RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(15.0),
+              //         ),
+              //       ),
+              //       backgroundColor: MaterialStateProperty.all(
+              //         Colors.yellow[700],
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

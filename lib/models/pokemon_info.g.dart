@@ -21,7 +21,7 @@ PokemonInfo _$PokemonInfoFromJson(Map<String, dynamic> json) => PokemonInfo(
       name: json['name'] as String,
       order: json['order'] as int,
       pastTypes: json['past_types'] as List<dynamic>,
-      species: json['species'],
+      species: Species.fromJson(json['species'] as Map<String, dynamic>),
       weight: json['weight'] as int,
     );
 
