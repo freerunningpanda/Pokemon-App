@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'background_widget.dart';
 import '../cubit/pokemon_cubit.dart';
 import 'custom_progress_indicator.dart';
+import 'image_provider_widget.dart';
 
 class PokemonPageWidget extends StatefulWidget {
   const PokemonPageWidget({Key? key}) : super(key: key);
@@ -68,6 +70,76 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
               ),
             ),
             const SizedBox(height: 15),
+            ImageProviderWidget(imageUrl: item.sprites.other.home.frontDefault),
+            const SizedBox(height: 15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Height:',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.red[900],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  '${item.height}',
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Abilities:',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.red[900],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  item.abilities[0].ability.name,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Base experience:',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.red[900],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  '${item.baseExperience}',
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             SizedBox(
               width: 270.0,
               height: 50.0,
@@ -100,6 +172,9 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 15,
+            )
           ],
         ),
       ),

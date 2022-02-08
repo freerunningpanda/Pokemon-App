@@ -22,6 +22,7 @@ PokemonInfo _$PokemonInfoFromJson(Map<String, dynamic> json) => PokemonInfo(
       order: json['order'] as int,
       pastTypes: json['past_types'] as List<dynamic>,
       species: Species.fromJson(json['species'] as Map<String, dynamic>),
+      sprites: Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
       weight: json['weight'] as int,
     );
 
@@ -38,5 +39,6 @@ Map<String, dynamic> _$PokemonInfoToJson(PokemonInfo instance) =>
       'order': instance.order,
       'past_types': instance.pastTypes,
       'species': instance.species,
+      'sprites': instance.sprites,
       'weight': instance.weight,
     };

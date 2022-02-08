@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'ability.dart';
 import 'species.dart';
+import 'sprites.dart';
 
 part 'pokemon_info.g.dart';
 
@@ -19,6 +20,7 @@ class PokemonInfo {
     required this.order,
     required this.pastTypes,
     required this.species,
+    required this.sprites,
     required this.weight,
   });
 
@@ -33,6 +35,7 @@ class PokemonInfo {
   final int order;
   final List<dynamic> pastTypes;
   final Species species;
+  final Sprites sprites;
   final int weight;
 
   factory PokemonInfo.fromJson(Map<String, dynamic> json) =>
