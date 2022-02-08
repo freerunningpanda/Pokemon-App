@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'background_widget.dart';
-import '../cubit/pokemon_cubit.dart';
+import '../cubit/pokemon_random_cubit.dart';
 import 'custom_progress_indicator.dart';
 import 'image_provider_widget.dart';
 
-class PokemonPageWidget extends StatelessWidget {
-  const PokemonPageWidget({Key? key}) : super(key: key);
+class RandomPokemonPageWidget extends StatelessWidget {
+  const RandomPokemonPageWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PokemonCubit, PokemonState>(
+    return BlocConsumer<PokemonRandomCubit, PokemonRandomState>(
       listener: (context, state) {
-        if (state is PokemonErrorState) {
+        if (state is PokemonRandomErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -24,7 +24,7 @@ class PokemonPageWidget extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is PokemonLoadedState) {
+        if (state is PokemonRandomLoadedState) {
           return _buildPokemonPage(context, state);
         }
         return const CustomProgressIndicator();
@@ -33,7 +33,7 @@ class PokemonPageWidget extends StatelessWidget {
   }
 }
 
-Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
+Widget _buildPokemonPage(BuildContext context, PokemonRandomLoadedState state) {
   final item = state.loadPokemon;
   return Container(
     width: double.infinity,
@@ -138,8 +138,8 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
               width: 270.0,
               height: 50.0,
               child: ElevatedButton(
-                onPressed: () => Navigator.of(context)
-                    .pushReplacementNamed('/main_page/search_page'),
+                onPressed: () =>
+                    Navigator.of(context).pushReplacementNamed('/main_page'),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

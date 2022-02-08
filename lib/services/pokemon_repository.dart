@@ -5,4 +5,6 @@ class PokemonRepository {
   final pokemonApiProvider = PokemonApiProvider();
   Future<PokemonInfo> getPokemon(String? name) =>
       pokemonApiProvider.getPokemonInfo(name);
+  Future<PokemonInfo> getRandomPokemon() =>
+      pokemonApiProvider.getRandomPokemon();
 }

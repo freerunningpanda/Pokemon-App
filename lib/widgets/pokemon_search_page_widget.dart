@@ -60,8 +60,6 @@ class _PokemonSearchPageWidgetState extends State<PokemonSearchPageWidget> {
                     child: ElevatedButton(
                       onPressed: () {
                         context.read<PokemonCubit>().fetchPokemon(pokemonName);
-                        // Navigator.of(context)
-                        //     .pushNamed('/main_page/pokemon_page');
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
