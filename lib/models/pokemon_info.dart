@@ -6,7 +6,7 @@ import 'sprites.dart';
 
 part 'pokemon_info.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PokemonInfo {
   PokemonInfo({
     required this.abilities,

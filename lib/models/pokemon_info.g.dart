@@ -28,9 +28,9 @@ PokemonInfo _$PokemonInfoFromJson(Map<String, dynamic> json) => PokemonInfo(
 
 Map<String, dynamic> _$PokemonInfoToJson(PokemonInfo instance) =>
     <String, dynamic>{
-      'abilities': instance.abilities,
+      'abilities': instance.abilities.map((e) => e.toJson()).toList(),
       'base_experience': instance.baseExperience,
-      'forms': instance.forms,
+      'forms': instance.forms.map((e) => e.toJson()).toList(),
       'height': instance.height,
       'held_items': instance.heldItems,
       'id': instance.id,
@@ -38,7 +38,7 @@ Map<String, dynamic> _$PokemonInfoToJson(PokemonInfo instance) =>
       'name': instance.name,
       'order': instance.order,
       'past_types': instance.pastTypes,
-      'species': instance.species,
-      'sprites': instance.sprites,
+      'species': instance.species.toJson(),
+      'sprites': instance.sprites.toJson(),
       'weight': instance.weight,
     };
