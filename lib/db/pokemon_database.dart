@@ -23,7 +23,7 @@ class PokemonDatabase {
       ),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE pokemons(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, frontDefault TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, abilities TEXT NOT NULL, baseExperience INTEGER NOT NULL)',
+          'CREATE TABLE pokemons(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, sprites TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, abilities TEXT NOT NULL, base_experience INTEGER NOT NULL)',
         );
       },
       version: 1,
@@ -35,8 +35,35 @@ class PokemonDatabase {
 
     await db.insert(
       'pokemons',
-      pokemonInfo.toJson(),
+      {
+        'id': pokemonInfo.id,
+        'name': pokemonInfo.name,
+        'sprites': pokemonInfo.sprites.other.home.frontDefault,
+        'height': pokemonInfo.height,
+        'weight': pokemonInfo.weight,
+        'abilities': pokemonInfo.abilities[0].ability.name,
+        'base_experience': pokemonInfo.baseExperience,
+      },
       conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<PokemonInfo>> pokemons() async {
+    final db = await instance.database;
+
+    final List<Map<String, dynamic>> maps = await db.query('pokemons');
+
+    return List.generate(
+      maps.length,
+      (index) => PokemonInfo(
+        id: maps[index]['id'],
+        name: maps[index]['name'],
+        sprites: maps[index]['sprites'],
+        height: maps[index]['height'],
+        weight: maps[index]['weight'],
+        abilities: maps[index]['abilities'],
+        baseExperience: maps[index]['base_experience'],
+      ),
     );
   }
 }

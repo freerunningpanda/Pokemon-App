@@ -7,22 +7,24 @@ part of 'pokemon_info.dart';
 // **************************************************************************
 
 PokemonInfo _$PokemonInfoFromJson(Map<String, dynamic> json) => PokemonInfo(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      sprites: Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
+      height: json['height'] as int,
+      weight: json['weight'] as int,
       abilities: (json['abilities'] as List<dynamic>)
           .map((e) => Ability.fromJson(e as Map<String, dynamic>))
           .toList(),
       baseExperience: json['base_experience'] as int,
-      height: json['height'] as int,
-      name: json['name'] as String,
-      sprites: Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
-      weight: json['weight'] as int,
     );
 
 Map<String, dynamic> _$PokemonInfoToJson(PokemonInfo instance) =>
     <String, dynamic>{
-      'abilities': instance.abilities.map((e) => e.toJson()).toList(),
-      'base_experience': instance.baseExperience,
-      'height': instance.height,
+      'id': instance.id,
       'name': instance.name,
       'sprites': instance.sprites.toJson(),
+      'height': instance.height,
       'weight': instance.weight,
+      'abilities': instance.abilities.map((e) => e.toJson()).toList(),
+      'base_experience': instance.baseExperience,
     };

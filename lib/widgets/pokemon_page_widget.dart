@@ -64,7 +64,7 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
               ),
             ),
             const SizedBox(height: 15),
-            ImageProviderWidget(imageUrl: item.sprites.other.home.frontDefault),
+            ImageProviderWidget(imageUrl: item.getSprites()),
             const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +79,28 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  '${item.height}',
+                  '${item.height / 10} cm',
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Weight:',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.red[900],
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  '${item.weight / 10} kg',
                   style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -101,7 +122,7 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  item.abilities[0].ability.name,
+                  item.getAbilities(),
                   style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
