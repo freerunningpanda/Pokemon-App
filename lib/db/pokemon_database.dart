@@ -38,10 +38,10 @@ class PokemonDatabase {
       {
         'id': pokemonInfo.id,
         'name': pokemonInfo.name,
-        'sprites': pokemonInfo.sprites.other.home.frontDefault,
+        'sprites': pokemonInfo.getSprites(),
         'height': pokemonInfo.height,
         'weight': pokemonInfo.weight,
-        'abilities': pokemonInfo.abilities[0].ability.name,
+        'abilities': pokemonInfo.getAbilities(),
         'base_experience': pokemonInfo.baseExperience,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
