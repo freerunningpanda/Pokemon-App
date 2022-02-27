@@ -23,7 +23,7 @@ class PokemonDatabase {
       ),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT NOT NULL, sprites TEXT NOT NULL, height INTEGER NOT NULL, weight INTEGER NOT NULL, abilities TEXT NOT NULL, base_experience INTEGER NOT NULL)',
+          'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT NOT NULL, sprites TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, abilities TEXT NOT NULL, base_experience INTEGER NOT NULL)',
         );
       },
       version: 1,
