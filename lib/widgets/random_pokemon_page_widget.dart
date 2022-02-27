@@ -197,9 +197,8 @@ Widget _buildPokemonPage(BuildContext context, PokemonRandomLoadedState state) {
               height: 50.0,
               child: ElevatedButton(
                 onPressed: () async {
-                  final db = PokemonDatabase.instance.insertPokemon(item);
-                  print(db);
-                  // print(await PokemonDatabase.instance.pokemons());
+                  await PokemonDatabase.instance.insertPokemon(item);
+                  print(await PokemonDatabase.instance.pokemons());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
