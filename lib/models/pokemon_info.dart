@@ -20,8 +20,8 @@ class PokemonInfo {
   final int id;
   final String name;
   final Sprites sprites;
-  final int height;
-  final int weight;
+  final double height;
+  final double weight;
   final List<Ability> abilities;
   final int baseExperience;
 

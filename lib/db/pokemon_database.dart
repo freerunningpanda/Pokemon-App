@@ -1,4 +1,7 @@
+import 'package:pokemon/models/home.dart';
+import 'package:pokemon/models/other.dart';
 import 'package:pokemon/models/pokemon_info.dart';
+import 'package:pokemon/models/sprites.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -58,7 +61,8 @@ class PokemonDatabase {
       (index) => PokemonInfo(
         id: maps[index]['id'],
         name: maps[index]['name'],
-        sprites: maps[index]['sprites'],
+        sprites: Sprites(
+            other: Other(home: Home(frontDefault: maps[index]['sprites']))),
         height: maps[index]['height'],
         weight: maps[index]['weight'],
         abilities: maps[index]['abilities'],
