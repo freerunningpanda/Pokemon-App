@@ -8,13 +8,9 @@ part 'ability.g.dart';
 class Ability {
   Ability({
     required this.ability,
-    required this.isHidden,
-    required this.slot,
   });
 
   final Species ability;
-  final bool isHidden;
-  final int slot;
 
   factory Ability.fromJson(Map<String, dynamic> json) =>
       _$AbilityFromJson(json);

@@ -25,8 +25,11 @@ class PokemonDatabase {
         'pokemon_database.db',
       ),
       onCreate: (db, version) {
-        return db.execute(
+        db.execute(
           'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT NOT NULL, sprites TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, abilities TEXT NOT NULL, base_experience INTEGER NOT NULL)',
+        );
+        db.execute(
+          'CREATE TABLE abilities(id INTEGER PRIMARY KEY, pokemonId INTEGER NOT NULL, abilities TEXT NOT NULL, isHidden INTEGER NOT NULL, slot INTEGER NOT NULL, FOREIGN KEY (pokemonId), REFERENCES pokemons (id))',
         );
       },
       version: 1,
@@ -54,7 +57,9 @@ class PokemonDatabase {
   Future<List<PokemonInfo>> pokemons() async {
     final db = await instance.database;
 
-    final List<Map<String, dynamic>> maps = await db.query('pokemons');
+    // final List<Map<String, dynamic>> maps = await db.query('pokemons');
+    final List<Map<String, dynamic>> maps =
+        await db.rawQuery('SELECT abilities.');
 
     return List.generate(
       maps.length,
