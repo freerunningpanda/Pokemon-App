@@ -47,8 +47,15 @@ class PokemonDatabase {
         'sprites': pokemonInfo.getSprites(),
         'height': pokemonInfo.height,
         'weight': pokemonInfo.weight,
-        'abilities': pokemonInfo.getAbilities(),
         'base_experience': pokemonInfo.baseExperience,
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    await db.insert(
+      'abilities',
+      {
+        'pokemonId': pokemonInfo.id,
+        'name': pokemonInfo.getAbilities(),
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
