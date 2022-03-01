@@ -26,10 +26,10 @@ class PokemonDatabase {
       ),
       onCreate: (db, version) {
         db.execute(
-          'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT NOT NULL, sprites TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, abilities TEXT NOT NULL, base_experience INTEGER NOT NULL)',
+          'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT NOT NULL, sprites TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, base_experience INTEGER NOT NULL)',
         );
         db.execute(
-          'CREATE TABLE abilities(id INTEGER PRIMARY KEY, pokemonId INTEGER NOT NULL, abilities TEXT NOT NULL, isHidden INTEGER NOT NULL, slot INTEGER NOT NULL, FOREIGN KEY (pokemonId), REFERENCES pokemons (id))',
+          'CREATE TABLE abilities(id INTEGER PRIMARY KEY, pokemonId INTEGER NOT NULL, name TEXT NOT NULL, FOREIGN KEY (pokemonId), REFERENCES pokemons (id))',
         );
       },
       version: 1,
@@ -58,8 +58,8 @@ class PokemonDatabase {
     final db = await instance.database;
 
     // final List<Map<String, dynamic>> maps = await db.query('pokemons');
-    final List<Map<String, dynamic>> maps =
-        await db.rawQuery('SELECT abilities.');
+    final List<Map<String, dynamic>> maps = await db.rawQuery(
+        'SELECT pokemons.id, pokemons.name, pokemons.sprites, pokemons.height, pokemons.weight, pokemons.base_experience, abilities.name FROM pokemons LEFT JOIN abilities ON pokemons.id = abilities.pokemonId');
 
     return List.generate(
       maps.length,
