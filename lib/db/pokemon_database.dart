@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:pokemon/models/home.dart';
-import 'package:pokemon/models/other.dart';
-import 'package:pokemon/models/pokemon_info.dart';
-import 'package:pokemon/models/sprites.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../models/home.dart';
+import '../models/other.dart';
+import '../models/pokemon_info.dart';
+import '../models/sprites.dart';
 import '../models/ability.dart';
 import '../models/species.dart';
 

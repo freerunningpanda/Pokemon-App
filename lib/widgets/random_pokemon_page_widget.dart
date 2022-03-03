@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon/db/pokemon_database.dart';
 
+import '../db/pokemon_database.dart';
 import 'background_widget.dart';
 import '../cubit/pokemon_random_cubit.dart';
 import 'custom_progress_indicator.dart';
@@ -199,7 +199,7 @@ Widget _buildPokemonPage(BuildContext context, PokemonRandomLoadedState state) {
                 onPressed: () async {
                   await PokemonDatabase.instance.insertPokemon(item);
                   await PokemonDatabase.instance.insertAbilities(item);
-                  print(await PokemonDatabase.instance.pokemons());
+                  await PokemonDatabase.instance.pokemons();
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -60,7 +60,7 @@ class _PokemonSearchPageWidgetState extends State<PokemonSearchPageWidget> {
                     width: 270.0,
                     height: 50.0,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         context.read<PokemonCubit>().fetchPokemon(pokemonName);
                       },
                       child: Row(
