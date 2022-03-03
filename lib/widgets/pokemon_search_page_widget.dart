@@ -34,7 +34,9 @@ class _PokemonSearchPageWidgetState extends State<PokemonSearchPageWidget> {
                   const SizedBox(height: 10),
                   TextField(
                     inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp("[a-z]")),
+                      FilteringTextInputFormatter.allow(
+                        RegExp("[a-z 0-9 -]"),
+                      ),
                     ],
                     cursorColor: Colors.red[900],
                     decoration: const InputDecoration(

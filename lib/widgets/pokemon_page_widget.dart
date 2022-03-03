@@ -197,7 +197,8 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
               child: ElevatedButton(
                 onPressed: () async {
                   await PokemonDatabase.instance.insertPokemon(item);
-                  print(await PokemonDatabase.instance.pokemons());
+                  await PokemonDatabase.instance.insertAbilities(item);
+                  // print(await PokemonDatabase.instance.pokemons());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -6,11 +6,9 @@ part 'species.g.dart';
 class Species {
   Species({
     required this.name,
-    required this.url,
   });
 
   final String name;
-  final String url;
 
   factory Species.fromJson(Map<String, dynamic> json) =>
       _$SpeciesFromJson(json);

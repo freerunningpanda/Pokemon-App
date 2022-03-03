@@ -17,7 +17,7 @@ class PokemonInfo {
     required this.baseExperience,
   });
 
-  final int id;
+  int? id;
   final String name;
   final Sprites sprites;
   final double height;

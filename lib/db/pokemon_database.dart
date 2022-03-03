@@ -1,45 +1,49 @@
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
 import 'package:pokemon/models/home.dart';
 import 'package:pokemon/models/other.dart';
 import 'package:pokemon/models/pokemon_info.dart';
 import 'package:pokemon/models/sprites.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+
+import '../models/ability.dart';
+import '../models/species.dart';
 
 class PokemonDatabase {
   PokemonDatabase._privateConstructor();
   static final PokemonDatabase instance = PokemonDatabase._privateConstructor();
 
-  static Database? _database;
+  static late Database _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database!;
-
     _database = await _initDB();
-    return _database!;
+    return _database;
   }
 
-  _initDB() async {
+  Future<Database> _initDB() async {
+    Directory dir = await getApplicationDocumentsDirectory();
+    String path = dir.path + 'pokemon_database.db';
     return await openDatabase(
-      join(
-        await getDatabasesPath(),
-        'pokemon_database.db',
-      ),
-      onCreate: (db, version) {
-        db.execute(
-          'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT NOT NULL, sprites TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, base_experience INTEGER NOT NULL)',
-        );
-        db.execute(
-          'CREATE TABLE abilities(id INTEGER PRIMARY KEY, pokemonId INTEGER NOT NULL, name TEXT NOT NULL, FOREIGN KEY (pokemonId), REFERENCES pokemons (id))',
-        );
-      },
+      path,
+      onCreate: _createDB,
       version: 1,
     );
   }
 
-  Future<void> insertPokemon(PokemonInfo pokemonInfo) async {
-    final db = await instance.database;
+  void _createDB(Database db, int version) async {
+    await db.execute(
+      'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT NOT NULL, sprites TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, base_experience INTEGER NOT NULL)',
+    );
+    await db.execute(
+      'CREATE TABLE abilities(id INTEGER PRIMARY KEY AUTOINCREMENT, pokemonId INTEGER NOT NULL, name TEXT NOT NULL, FOREIGN KEY (pokemonId) REFERENCES pokemons (id))',
+    );
+  }
 
-    await db.insert(
+  Future<void> insertPokemon(PokemonInfo pokemonInfo) async {
+    Database db = await instance.database;
+
+    pokemonInfo.id = await db.insert(
       'pokemons',
       {
         'id': pokemonInfo.id,
@@ -51,6 +55,11 @@ class PokemonDatabase {
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+  }
+
+  Future<void> insertAbilities(PokemonInfo pokemonInfo) async {
+    Database db = await instance.database;
+
     await db.insert(
       'abilities',
       {
@@ -61,13 +70,25 @@ class PokemonDatabase {
     );
   }
 
+  // Future<PokemonInfo> insertPokemon(PokemonInfo pokemonInfo) async {
+  //   Database db = await instance.database;
+  //   pokemonInfo.id = await db.insert('pokemons', pokemonInfo.toJson());
+  //   return pokemonInfo;
+  // }
+
+  // READ
   Future<List<PokemonInfo>> pokemons() async {
-    final db = await instance.database;
+    Database db = await instance.database;
 
     // final List<Map<String, dynamic>> maps = await db.query('pokemons');
     final List<Map<String, dynamic>> maps = await db.rawQuery(
-        'SELECT pokemons.id, pokemons.name, pokemons.sprites, pokemons.height, pokemons.weight, pokemons.base_experience, abilities.name FROM pokemons LEFT JOIN abilities ON pokemons.id = abilities.pokemonId');
+        'SELECT * FROM pokemons LEFT JOIN abilities ON pokemons.id = abilities.pokemonId');
+    // final List<PokemonInfo> pokeList = [];
+    // maps.forEach((pokeMap) {
+    //   pokeList.add(PokemonInfo.fromJson(pokeMap));
+    // });
 
+    // return pokeList;
     return List.generate(
       maps.length,
       (index) => PokemonInfo(
@@ -77,9 +98,13 @@ class PokemonDatabase {
             other: Other(home: Home(frontDefault: maps[index]['sprites']))),
         height: maps[index]['height'],
         weight: maps[index]['weight'],
-        abilities: maps[index]['abilities'],
+        abilities: [Ability(ability: Species(name: maps[index]['name']))],
         baseExperience: maps[index]['base_experience'],
       ),
     );
   }
+
+  // List<Ability> getAb() {
+  //   return List.generate(1, (index) => null);
+  // }
 }
