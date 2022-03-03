@@ -36,7 +36,7 @@ class PokemonDatabase {
       'CREATE TABLE pokemons(id INTEGER PRIMARY KEY, name TEXT NOT NULL, sprites TEXT NOT NULL, height REAL NOT NULL, weight REAL NOT NULL, base_experience INTEGER NOT NULL)',
     );
     await db.execute(
-      'CREATE TABLE abilities(id INTEGER PRIMARY KEY AUTOINCREMENT, pokemonId INTEGER NOT NULL, name TEXT NOT NULL, FOREIGN KEY (pokemonId) REFERENCES pokemons (id))',
+      'CREATE TABLE abilities(id INTEGER PRIMARY KEY AUTOINCREMENT, pokemonId INTEGER NOT NULL, ability TEXT NOT NULL, FOREIGN KEY (pokemonId) REFERENCES pokemons (id))',
     );
   }
 
@@ -64,31 +64,19 @@ class PokemonDatabase {
       'abilities',
       {
         'pokemonId': pokemonInfo.id,
-        'name': pokemonInfo.getAbilities(),
+        'ability': pokemonInfo.getAbilities(),
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  // Future<PokemonInfo> insertPokemon(PokemonInfo pokemonInfo) async {
-  //   Database db = await instance.database;
-  //   pokemonInfo.id = await db.insert('pokemons', pokemonInfo.toJson());
-  //   return pokemonInfo;
-  // }
-
   // READ
   Future<List<PokemonInfo>> pokemons() async {
     Database db = await instance.database;
 
-    // final List<Map<String, dynamic>> maps = await db.query('pokemons');
     final List<Map<String, dynamic>> maps = await db.rawQuery(
         'SELECT * FROM pokemons LEFT JOIN abilities ON pokemons.id = abilities.pokemonId');
-    // final List<PokemonInfo> pokeList = [];
-    // maps.forEach((pokeMap) {
-    //   pokeList.add(PokemonInfo.fromJson(pokeMap));
-    // });
 
-    // return pokeList;
     return List.generate(
       maps.length,
       (index) => PokemonInfo(
@@ -98,13 +86,9 @@ class PokemonDatabase {
             other: Other(home: Home(frontDefault: maps[index]['sprites']))),
         height: maps[index]['height'],
         weight: maps[index]['weight'],
-        abilities: [Ability(ability: Species(name: maps[index]['name']))],
+        abilities: [Ability(ability: Species(name: maps[index]['ability']))],
         baseExperience: maps[index]['base_experience'],
       ),
     );
   }
-
-  // List<Ability> getAb() {
-  //   return List.generate(1, (index) => null);
-  // }
 }

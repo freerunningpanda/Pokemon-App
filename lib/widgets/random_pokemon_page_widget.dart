@@ -199,7 +199,7 @@ Widget _buildPokemonPage(BuildContext context, PokemonRandomLoadedState state) {
                 onPressed: () async {
                   await PokemonDatabase.instance.insertPokemon(item);
                   await PokemonDatabase.instance.insertAbilities(item);
-                  // print(await PokemonDatabase.instance.pokemons());
+                  print(await PokemonDatabase.instance.pokemons());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
