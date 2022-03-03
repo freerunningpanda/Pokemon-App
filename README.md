@@ -1,4 +1,4 @@
-<h1 align="center">WeatherApp</h1>
+<h1 align="center">PokemonApp</h1>
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/91142494/156648446-3debb653-d8cb-428e-8f61-ec80f09ce8fa.png" width="23%"></img>
