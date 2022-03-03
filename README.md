@@ -1,16 +1,36 @@
-# pokemon
+<h1 align="center">WeatherApp</h1>
 
-A new Flutter project.
+<p align="center">
+<img src="https://user-images.githubusercontent.com/91142494/156648446-3debb653-d8cb-428e-8f61-ec80f09ce8fa.png" width="23%"></img>
+<img src="https://user-images.githubusercontent.com/91142494/156647906-7655b0d2-c32e-4be7-93f9-3e6f5554661e.png" width="23%"></img>
+<img src="https://user-images.githubusercontent.com/91142494/156648092-3f866220-63fe-4698-bca3-1c11b9b1d2a7.png" width="23%"></img>
+</p>
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# PokemonApp
 
-A few resources to get you started if this is your first Flutter project:
+A simple Pokemon App created using [Flutter](https://flutter.dev/) and [Dart](https://dart.dev/) and using API from [PokeAPI](https://pokeapi.co/).
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features
+
+- Find pokemon by name
+- Show random pokemon info
+
+
+## How to Run
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/freerunningpanda/pokemon_app.git
+   ```
+2. Install all the packages by typing the following command
+   ```sh
+   flutter pub get
+   ```
+3. Run the App
+
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
