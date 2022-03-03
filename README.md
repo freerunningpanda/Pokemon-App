@@ -30,7 +30,4 @@ A simple Pokemon App created using [Flutter](https://flutter.dev/) and [Dart](ht
    ```
 3. Run the App
 
-## License
-Distributed under the MIT License. See `LICENSE` for more information.
-
 
