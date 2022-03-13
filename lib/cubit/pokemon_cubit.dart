@@ -16,13 +16,11 @@ class PokemonCubit extends Cubit<PokemonState> {
   Future<void> fetchPokemon([String? name]) async {
     try {
       emit(PokemonInitial());
-      // var pokemon = await localRepository.getPokemon(name);
-      // if (pokemon == null) {
-      //   pokemon = await pokemonRepository.getPokemon(name);
-      //   localRepository.insertPokemon(pokemon!);
-      // }
-      var pokemon = await pokemonRepository.getPokemon(name);
-      localRepository.insertPokemon(pokemon!);
+      var pokemon = await localRepository.getPokemon(name);
+      if (pokemon == null) {
+        pokemon = await pokemonRepository.getPokemon(name);
+        localRepository.insertPokemon(pokemon!);
+      }
       emit(PokemonLoadedState(pokemon));
     } catch (e) {
       emit(PokemonErrorState(e.toString()));
