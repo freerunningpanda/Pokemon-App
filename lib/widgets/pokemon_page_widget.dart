@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../db/pokemon_database.dart';
 import 'background_widget.dart';
 import '../cubit/pokemon_cubit.dart';
 import 'custom_progress_indicator.dart';
@@ -184,44 +183,6 @@ Widget _buildPokemonPage(BuildContext context, PokemonLoadedState state) {
                   ),
                   backgroundColor: MaterialStateProperty.all(
                     Colors.red[900],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              width: 270.0,
-              height: 50.0,
-              child: ElevatedButton(
-                onPressed: () async {
-                  await PokemonDatabase.instance.insertPokemon(item);
-                  await PokemonDatabase.instance.insertAbilities(item);
-                  await PokemonDatabase.instance.pokemons();
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(width: 5),
-                    Text(
-                      'Save',
-                      style: TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.red[900],
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all(
-                    Colors.yellow[700],
                   ),
                 ),
               ),

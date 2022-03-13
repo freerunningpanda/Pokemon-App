@@ -9,6 +9,7 @@ import '../models/pokemon_info.dart';
 import '../models/sprites.dart';
 import '../models/ability.dart';
 import '../models/species.dart';
+import '../services/pokemon_api_provider.dart';
 
 class PokemonDatabase {
   PokemonDatabase._privateConstructor();
@@ -55,11 +56,6 @@ class PokemonDatabase {
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-  }
-
-  Future<void> insertAbilities(PokemonInfo pokemonInfo) async {
-    Database db = await instance.database;
-
     await db.insert(
       'abilities',
       {
@@ -71,13 +67,41 @@ class PokemonDatabase {
   }
 
   // READ
-  Future<List<PokemonInfo>> pokemons() async {
+  // Future<List<PokemonInfo>> pokemons() async {
+  //   Database db = await instance.database;
+
+  //   final List<Map<String, dynamic>> maps = await db.rawQuery(
+  //       'SELECT * FROM pokemons LEFT JOIN abilities ON pokemons.id = abilities.pokemonId');
+
+  //   return List.generate(
+  //     maps.length,
+  //     (index) => PokemonInfo(
+  //       id: maps[index]['id'],
+  //       name: maps[index]['name'],
+  //       sprites: Sprites(
+  //           other: Other(home: Home(frontDefault: maps[index]['sprites']))),
+  //       height: maps[index]['height'],
+  //       weight: maps[index]['weight'],
+  //       abilities: [
+  //         for (var i in maps[index]['ability'])
+  //           Ability(ability: Species(name: i))
+  //       ],
+  //       baseExperience: maps[index]['base_experience'],
+  //     ),
+  //   );
+  // }
+
+  Future<PokemonInfo?> getPokemon(String? name) async {
     Database db = await instance.database;
 
     final List<Map<String, dynamic>> maps = await db.rawQuery(
-        'SELECT * FROM pokemons LEFT JOIN abilities ON pokemons.id = abilities.pokemonId');
+        'SELECT * FROM pokemons LEFT JOIN abilities ON pokemons.id = abilities.pokemonId where pokemons.name = ?',
+        [name]); // TODO доделать запрос
+    // TODO: если покемона нет в БД, вернуть null
 
-    return List.generate(
+    await PokemonApiProvider().getPokemonInfo(name);
+
+    var tempList = List.generate(
       maps.length,
       (index) => PokemonInfo(
         id: maps[index]['id'],
@@ -86,9 +110,13 @@ class PokemonDatabase {
             other: Other(home: Home(frontDefault: maps[index]['sprites']))),
         height: maps[index]['height'],
         weight: maps[index]['weight'],
-        abilities: [Ability(ability: Species(name: maps[index]['ability']))],
+        abilities: [
+          for (var i in maps[index]['ability'])
+            Ability(ability: Species(name: i))
+        ],
         baseExperience: maps[index]['base_experience'],
       ),
     );
+    return tempList[0];
   }
 }

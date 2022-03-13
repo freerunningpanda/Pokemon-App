@@ -8,6 +8,7 @@ import 'pages/home_page.dart';
 import 'pages/pokemon_random_page.dart';
 import 'pages/pokemon_search_page.dart';
 import 'pages/pokemon_page.dart';
+import '/services/pokemon_local_repository.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -23,10 +24,12 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PokemonRandomCubit>(
-          create: (context) => PokemonRandomCubit(PokemonRepository()),
+          create: (context) =>
+              PokemonRandomCubit(PokemonRepository(), PokemonLocalRepository()),
         ),
         BlocProvider<PokemonCubit>(
-          create: (context) => PokemonCubit(PokemonRepository()),
+          create: (context) =>
+              PokemonCubit(PokemonRepository(), PokemonLocalRepository()),
         ),
       ],
       child: MaterialApp(
