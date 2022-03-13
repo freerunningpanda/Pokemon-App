@@ -1,9 +1,10 @@
 <h1 align="center">PokemonApp</h1>
 
 <p align="center">
+
 <img src="https://user-images.githubusercontent.com/91142494/156648446-3debb653-d8cb-428e-8f61-ec80f09ce8fa.png" width="23%"></img>
 <img src="https://user-images.githubusercontent.com/91142494/156647906-7655b0d2-c32e-4be7-93f9-3e6f5554661e.png" width="23%"></img>
-<img src="https://user-images.githubusercontent.com/91142494/156648092-3f866220-63fe-4698-bca3-1c11b9b1d2a7.png" width="23%"></img>
+<img src="https://user-images.githubusercontent.com/91142494/158078256-12e50582-37cb-42e1-9f07-f5f8d40e3f03.png" width="23%"></img>
 </p>
 
 
