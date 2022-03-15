@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '/cubit/pokemon_random_cubit.dart';
 import '/services/pokemon_repository.dart';
-import 'cubit/pokemon_cubit.dart';
 import 'pages/home_page.dart';
 import 'pages/pokemon_random_page.dart';
 import 'pages/pokemon_search_page.dart';
@@ -21,17 +20,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<PokemonRandomCubit>(
-          create: (context) =>
-              PokemonRandomCubit(PokemonRepository(), PokemonLocalRepository()),
-        ),
-        BlocProvider<PokemonCubit>(
-          create: (context) =>
-              PokemonCubit(PokemonRepository(), PokemonLocalRepository()),
-        ),
-      ],
+    return BlocProvider<PokemonRandomCubit>(
+      create: (context) =>
+          PokemonRandomCubit(PokemonRepository(), PokemonLocalRepository()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
